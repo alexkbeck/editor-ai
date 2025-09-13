@@ -12,16 +12,19 @@ export async function POST(req: NextRequest) {
     system,
   } = await req.json();
 
-  const apiKey = key || process.env.OPENAI_API_KEY;
+  const apiKey = key || process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
     return NextResponse.json(
-      { error: 'Missing OpenAI API key.' },
+      { error: 'Missing OpenRouter API key.' },
       { status: 401 }
     );
   }
 
-  const openai = createOpenAI({ apiKey });
+  const openai = createOpenAI({
+    apiKey,
+    baseURL: 'https://openrouter.ai/api/v1'
+  });
 
   try {
     const result = await generateText({

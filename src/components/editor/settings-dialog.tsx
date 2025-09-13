@@ -48,12 +48,12 @@ interface Model {
 }
 
 export const models: Model[] = [
-  { label: 'gpt-4o-mini', value: 'gpt-4o-mini' },
-  { label: 'gpt-4o', value: 'gpt-4o' },
-  { label: 'gpt-4-turbo', value: 'gpt-4-turbo' },
-  { label: 'gpt-4', value: 'gpt-4' },
-  { label: 'gpt-3.5-turbo', value: 'gpt-3.5-turbo' },
-  { label: 'gpt-3.5-turbo-instruct', value: 'gpt-3.5-turbo-instruct' },
+  { label: 'openai/gpt-4o-mini', value: 'openai/gpt-4o-mini' },
+  { label: 'openai/gpt-4o', value: 'openai/gpt-4o' },
+  { label: 'openai/gpt-4-turbo', value: 'openai/gpt-4-turbo' },
+  { label: 'anthropic/claude-3.5-sonnet', value: 'anthropic/claude-3.5-sonnet' },
+  { label: 'google/gemini-pro', value: 'google/gemini-pro' },
+  { label: 'meta-llama/llama-3.1-8b-instruct', value: 'meta-llama/llama-3.1-8b-instruct' },
 ];
 
 export function SettingsDialog() {
@@ -61,7 +61,7 @@ export function SettingsDialog() {
 
   const [tempModel, setTempModel] = React.useState(models[0]);
   const [tempKeys, setTempKeys] = React.useState<Record<string, string>>({
-    openai: '',
+    openrouter: '',
     uploadthing: '',
   });
   const [showKey, setShowKey] = React.useState<Record<string, boolean>>({});
@@ -77,7 +77,7 @@ export function SettingsDialog() {
       ...chatOptions,
       body: {
         ...chatOptions.body,
-        apiKey: tempKeys.openai,
+        apiKey: tempKeys.openrouter,
         model: tempModel.value,
       },
     });
@@ -91,7 +91,7 @@ export function SettingsDialog() {
       ...completeOptions,
       body: {
         ...completeOptions.body,
-        apiKey: tempKeys.openai,
+        apiKey: tempKeys.openrouter,
         model: tempModel.value,
       },
     });
@@ -119,8 +119,8 @@ export function SettingsDialog() {
           <a
             className="flex items-center"
             href={
-              service === 'openai'
-                ? 'https://platform.openai.com/api-keys'
+              service === 'openrouter'
+                ? 'https://openrouter.ai/keys'
                 : 'https://uploadthing.com/dashboard'
             }
             rel="noopener noreferrer"
@@ -196,7 +196,7 @@ export function SettingsDialog() {
             </div>
 
             <div className="space-y-4">
-              {renderApiKeyInput('openai', 'OpenAI API key')}
+              {renderApiKeyInput('openrouter', 'OpenRouter API key')}
 
               <div className="group relative">
                 <label
