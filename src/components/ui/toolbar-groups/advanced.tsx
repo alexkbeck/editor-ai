@@ -14,12 +14,9 @@ export function AdvancedGroup() {
   return (
     <ToolbarGroup>
       <LineHeightToolbarButton />
-      <MarkToolbarButton nodeType={KEYS.highlight} tooltip="Highlight">
-        <HighlighterIcon />
-      </MarkToolbarButton>
+
+      {/* show|hide comments */}
       <CommentToolbarButton />
-      <MoreToolbarButton />
-      <ModeToolbarButton />
     </ToolbarGroup>
   );
 }

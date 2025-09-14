@@ -19,7 +19,6 @@ import {
 
 export function FixedToolbarButtons() {
   const readOnly = useEditorReadOnly();
-  const { visibleGroups, shouldShowMore } = useResponsiveToolbar();
 
   const renderGroup = (groupName: string) => {
     switch (groupName) {
@@ -27,12 +26,6 @@ export function FixedToolbarButtons() {
         return <DocumentActionsGroup key={groupName} />;
       case 'content-type':
         return <ContentTypeGroup key={groupName} />;
-      case 'basic-formatting':
-        return <BasicFormattingGroup key={groupName} />;
-      case 'text-styling':
-        return <TextStylingGroup key={groupName} />;
-      case 'paragraph':
-        return <ParagraphGroup key={groupName} />;
       case 'rich-content':
         return <RichContentGroup key={groupName} />;
       case 'advanced':
@@ -40,17 +33,6 @@ export function FixedToolbarButtons() {
       default:
         return null;
     }
-  };
-
-  const renderHiddenGroups = () => {
-    const allGroups = ['document-actions', 'content-type', 'basic-formatting', 'text-styling', 'paragraph', 'rich-content', 'advanced'];
-    const hiddenGroups = allGroups.filter(group => !visibleGroups.includes(group));
-
-    return hiddenGroups.map(groupName => (
-      <div key={`hidden-${groupName}`} className="hidden">
-        {renderGroup(groupName)}
-      </div>
-    ));
   };
 
   if (readOnly) {
@@ -62,18 +44,18 @@ export function FixedToolbarButtons() {
     );
   }
 
+  // Top row: Most common actions (made more prominent)
+  const topRowGroups = ['document-actions', 'content-type', 'rich-content', 'advanced'];
+
   return (
-    <div className="flex w-full items-center">
-      {visibleGroups.map(groupName => renderGroup(groupName))}
-
-      {shouldShowMore && (
-        <EnhancedMoreToolbarButton
-          secondaryTools={renderHiddenGroups()}
-          showSecondaryInDropdown={true}
-        />
-      )}
-
-      <div className="grow" />
+    <div className="flex flex-col gap-3 w-full">
+      <div className="flex items-center justify-center gap-1">
+        {topRowGroups.map(groupName => (
+          <div key={groupName} className="[&_button]:h-10 [&_button]:min-w-10 [&_button]:px-2.5">
+            {renderGroup(groupName)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

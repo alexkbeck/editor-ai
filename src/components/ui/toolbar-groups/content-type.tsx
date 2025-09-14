@@ -16,6 +16,8 @@ export function ContentTypeGroup() {
       </AIToolbarButton>
       <TurnIntoToolbarButton />
       <InsertToolbarButton />
+
+      {/* instead of font size, have a text size accessbility option */}
       <FontSizeToolbarButton />
     </ToolbarGroup>
   );

@@ -1,5 +1,7 @@
 import { Toaster } from 'sonner';
 
+import ShaderBackground from '@/components/ui/shader-background';
+
 import { PlateEditor } from '@/components/editor/plate-editor';
 import { Sidebar, SidebarBody } from '@/components/ui/sidebar';
 
@@ -18,22 +20,26 @@ const EditorSidebar = () => {
 
 export default function Page() {
   return (
-    <div className="h-screen w-full bg-gray-100 flex">
-      <Sidebar>
-        <SidebarBody>
-          <EditorSidebar />
-        </SidebarBody>
-      </Sidebar>
 
-      <div className="flex-1 flex items-center justify-center p-2 min-w-0">
-        <div className="w-full max-w-full h-[98%] bg-white rounded-md shadow-sm border border-gray-200 px-4 flex items-center justify-center">
-          <div className="w-full max-w-4xl">
-            <PlateEditor />
+      <div className="h-full w-full bg-gray-100 flex">  
+        <ShaderBackground>    
+        <div className="flex-1 flex items-center justify-center p-2 min-w-0">
+          
+            <Sidebar>
+              <SidebarBody>
+                <EditorSidebar />
+              </SidebarBody>
+            </Sidebar>
+          
+          <div className="w-full max-w-full bg-white rounded-md shadow-sm border border-gray-200 px-4 flex items-center justify-center">
+            <div className="w-full max-w-6xl">
+              <div className="h-full w-full overflow-auto p-2"></div>
+              <PlateEditor />
+              </div>
+            </div>
           </div>
-        </div>
+        <Toaster />
+        </ShaderBackground>
       </div>
-
-      <Toaster />
-    </div>
   );
 }

@@ -20,6 +20,7 @@
     "@ariakit/react": "^0.4.18",
     "@emoji-mart/data": "1.2.1",
     "@faker-js/faker": "^9.9.0",
+    "@paper-design/shaders-react": "^0.0.52",
     "@platejs/ai": "^49.2.4",
     "@platejs/autoformat": "^49.0.0",
     "@platejs/basic-nodes": "^49.0.0",
